@@ -33,7 +33,12 @@ function Join () {
     }
 
     // ID 중복 체크
-	const checkIdDuplicate = async () => {
+	const checkIdDuplicate = async (event) => {
+
+		if(id === ''){
+			alert("아이디를 입력하세요.")
+			return;
+		}
 
 		await axios.get("http://localhost:8080/user", { params: { id: id } })
 			.then((resp) => {
@@ -50,11 +55,11 @@ function Join () {
 				console.log(err);
 
 				const resp = err.response;
-				if (resp.status == 400) {
+				if (resp.status === 400) {
 					alert(resp.data);
-				}else if(resp.status == 500){
-                    alert(resp.data);
-                }
+				}else if(resp.status === 500){
+					alert("중복된 아이디입니다.")
+				}
 			});
 
 	}
@@ -62,6 +67,22 @@ function Join () {
     // 회원가입
     const join = async () => {
 
+		if(!pwd === checkPwd){
+			alert("비밀번호를 확인해주세요.")
+			return;
+		}
+
+		const req = {
+			id: id,
+			name, name,
+			pwd: pwd,
+			checkPwd: checkPwd,
+			email: email
+		}
+
+
+
+		await axios.post()
     }
 
     return (
