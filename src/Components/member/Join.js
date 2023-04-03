@@ -33,31 +33,28 @@ function Join () {
     }
 
     // ID 중복 체크
-	const checkIdDuplicate = async () => {
+    const checkIdDuplicate = async () => {
 
-		await axios.get("http://localhost:8080/user", { params: { id: id } })
-			.then((resp) => {
-				console.log("[Join.js] checkIdDuplicate() success :D");
+        await axios.get("http://localhost:8080/user", { params: { id: id } })
+            .then((resp) => {
+                console.log("[Join.js] checkIdDuplicate() success!");
 				console.log(resp.data);
 
 				if (resp.status == 200) {
 					alert("사용 가능한 아이디입니다.");
 				}
-				
-			})
-			.catch((err) => {
-				console.log("[Join.js] checkIdDuplicate() error :<");
+            })
+            .catch((err) => {
+				console.log("[Join.js] checkIdDuplicate() error!");
 				console.log(err);
 
 				const resp = err.response;
 				if (resp.status == 400) {
 					alert(resp.data);
-				}else if(resp.status == 500){
-                    alert(resp.data);
-                }
+				}
 			});
 
-	}
+    }
 
     // 회원가입
     const join = async () => {
