@@ -82,7 +82,24 @@ function Join () {
 
 
 
-		await axios.post()
+		await axios.post("http://localhost:8080/user/join", req)
+			.then((resp) => {
+				console.log("[Join.js] join() success!");
+				console.log(resp.data);
+
+				alert(resp.data.id + "님 회원가입을 축하드립니다 🎊");
+				navigate("/login");
+
+			}).catch((err) => {
+				console.log("[Join.js] join() error!");
+				console.log(err);
+
+				const resp = err.response;
+				if (resp.status == 400) {
+					alert(resp.data);
+				}
+			}
+		);
     }
 
     return (
