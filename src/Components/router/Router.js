@@ -6,6 +6,8 @@ import BbsDetail from "../bbs/BbsDetail"
 import BbsWrite from "../bbs/BbsWrite"
 import BbsUpdate from "../bbs/BbsUpdate"
 import Join from "../member/Join"
+import Login from "../member/Login"
+
 
 
 function Router() {
@@ -19,6 +21,7 @@ function Router() {
 				<Route path="/bbsupdate" element={<BbsUpdate />}></Route>
 
 				<Route path="/join" element={<Join />}></Route>
+				<Route path="/login" element={<Login />}></Route>
 			</Routes>
 	);
 }
