@@ -7,6 +7,7 @@ import BbsWrite from "../bbs/BbsWrite"
 import BbsUpdate from "../bbs/BbsUpdate"
 import Join from "../member/Join"
 import Login from "../member/Login"
+import Logout from "../member/Logout"
 
 
 
@@ -22,6 +23,7 @@ function Router() {
 
 				<Route path="/join" element={<Join />}></Route>
 				<Route path="/login" element={<Login />}></Route>
+				<Route path="/logout" element={<Logout />}></Route>
 			</Routes>
 	);
 }
