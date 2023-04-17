@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useParams , Link, useNavigate} from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
+
+import CommentWrite from "../comment/CommentWrite";
+import CommentList from "../comment/CommentList";
 
 function BbsDetail () {
 
+    const { auth, setAuth } = useContext(AuthContext)
     const [bbs, setBbs] = useState({});
 	const { seq } = useParams(); // 파라미터 가져오기
 
@@ -46,15 +52,27 @@ function BbsDetail () {
 		content: bbs.content
 	}
 
+    const parentBbs = {
+		id: bbs.id,
+		title: bbs.title
+	}
+
     return (
         <div>
             <div className="my-3 d-flex justify-content-end">
-                <>
-                    {/* 자신이 작성한 게시글인 경우에만 수정 삭제 가능토록 추후 수정*/}
-                    <Link className="btn btn-outline-secondary"  to="/bbsupdate" state={{ bbs: updateBbs }}><i className="fas fa-edit"></i> 수정</Link> &nbsp;
-                    <button className="btn btn-outline-danger"  onClick={deleteBbs}><i className="fas fa-trash-alt"></i> 삭제</button>
-                </>
-            </div>
+				<Link className="btn btn-outline-secondary" to={{pathname: `/bbsanswer/${bbs.seq}` }} state={{ parentBbs: parentBbs }}><i className="fas fa-pen"></i> 답글쓰기</Link> &nbsp;
+
+			{
+				/* 자신이 작성한 게시글인 경우에만 수정 삭제 가능 */
+				(localStorage.getItem("id") == bbs.id) ?
+					<>
+						<Link className="btn btn-outline-secondary"  to="/bbsupdate" state={{ bbs: updateBbs }}><i className="fas fa-edit"></i> 수정</Link> &nbsp;
+						<button className="btn btn-outline-danger"  onClick={deleteBbs}><i className="fas fa-trash-alt"></i> 삭제</button>
+					</>
+				:
+				null
+			}
+			</div>
             <table className="table table-striped">
                 <tbody>
                     <tr>
@@ -98,6 +116,19 @@ function BbsDetail () {
             <div className="my-3 d-flex justify-content-center">
                 <Link className="btn btn-outline-secondary" to="/bbslist"><i className="fas fa-list"></i> 글목록</Link>
             </div><br/><br/>
+
+            {/* 댓글 작성 컴포넌트 */}
+			{
+				(auth) ? // 로그인한 사용자만 댓글 작성 가능
+					<CommentWrite seq={seq}/>
+				:
+					null
+			}
+			
+
+			{/* 댓글 리스트 컴포넌트 */}
+			<CommentList  seq={seq}/>
+
         </div>
     );
 };
