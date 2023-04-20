@@ -27,6 +27,11 @@ function CommentWrite(props) {
 			bbsSeq: seq
 		}
 
+		if(!content){
+			alert("내용을 입력해주세요.");
+			return;
+		}
+
 		await axios.post(`http://localhost:8080/comment`, req, { params: {"bbsSeq": seq}, headers: headers})
 		.then((resp) => {
 			console.log("[CommentWrite.js] createComment() success :D");
