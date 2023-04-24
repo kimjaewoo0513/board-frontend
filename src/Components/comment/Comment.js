@@ -16,6 +16,7 @@ function Comment(props) {
 	const [show, setShow] = useState(false);
 
 	const [content, setContent] = useState(comment.content);
+	
 	const changeContent = (event) => {
 		setContent(event.target.value);
 	};

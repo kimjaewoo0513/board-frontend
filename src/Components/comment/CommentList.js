@@ -8,7 +8,6 @@ function CommentList(props) {
 
 	const seq = props.seq;
 
-	// Paging
 	const [page, setPage] = useState(1);
 	const [totalCnt, setTotalCnt] = useState(0);
 
