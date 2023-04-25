@@ -20,7 +20,7 @@ function Comment(props) {
 	// useState 초기화값이 갱신되지 않았던 문제가 있었음.
 	useEffect(()=> {
 		setContent(comment.content);
-	})
+	},[comment.content])
 	
 	
 	const changeContent = (event) => {
