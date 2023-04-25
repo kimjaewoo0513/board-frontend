@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/AuthProvider";
 import { HttpHeadersContext } from "../context/HttpHeadersProvider";
@@ -15,7 +15,13 @@ function Comment(props) {
 
 	const [show, setShow] = useState(false);
 
-	const [content, setContent] = useState(comment.content);
+	const [content, setContent] = useState();
+
+	// useState 초기화값이 갱신되지 않았던 문제가 있었음.
+	useEffect(()=> {
+		setContent(comment.content);
+	})
+	
 	
 	const changeContent = (event) => {
 		setContent(event.target.value);
