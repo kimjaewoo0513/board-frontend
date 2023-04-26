@@ -1,10 +1,14 @@
-import React from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
+import { HttpHeadersContext } from "../context/HttpHeadersProvider";
 
 function BbsWrite (){
 
+	const { auth, setAuth } = useContext(AuthContext)
+	const { headers, setHeaders } = useContext(HttpHeadersContext);
+	
     const navigate = useNavigate();
     const [title , setTitle] = useState("");
     const [content , setContent] = useState("");
@@ -20,12 +24,13 @@ function BbsWrite (){
 	/* [POST /bbs]: 게시글 작성 */
     const createBbs = async() => {
 		const req = {
+			id: localStorage.getItem("id"),
 			title : title,
 			content : content,
 
 		}
 
-		await axios.post("http://localhost:8080/bbs",req)
+		await axios.post("http://localhost:8080/bbs", req, {headers: headers})
 		.then((resp) => {
 			console.log("[BbsWrite.js] createBbs() success");
 			console.log(resp.data);
@@ -41,7 +46,10 @@ function BbsWrite (){
 	}
 
 	useEffect(() => {
-		// 추후 사용자 인증 추가
+		if (!auth) {
+			alert("로그인 한 사용자만 게시글을 작성할 수 있습니다 !");
+			navigate(-1);
+		}
 	}, []);
 
 

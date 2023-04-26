@@ -15,8 +15,7 @@ function Nav() {
 
 						{/* 메인 화면 */}
 						<li className="nav-item">
-												{/* 첫 화면 무조건 게시판 List  -> 추후 수정 */}
-							<Link className="nav-link" to="/bbslist"><i className="fas fa-home"></i> Home</Link>
+							<Link className="nav-link" to="/"><i className="fas fa-home"></i> Home</Link>
 						</li>
 
 						{/* 게시판 */}

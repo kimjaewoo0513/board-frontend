@@ -27,14 +27,14 @@ function BbsList() {
 
 		await axios.get("http://localhost:8080/bbs", { params: { "choice": choice, "search": search, "page": page } })
 			.then((resp) => {
-				console.log("[BbsList.js] getBbsList() success!");
+				console.log("[BbsList.js] useEffect() success :D");
 				console.log(resp.data);
 
 				setBbsList(resp.data.bbsList);
 				setTotalCnt(resp.data.pageCnt);
 			})
 			.catch((err) => {
-				console.log("[BbsList.js] getBbsList() error!");
+				console.log("[BbsList.js] useEffect() error :<");
 				console.log(err);
 
 			});
@@ -85,7 +85,6 @@ function BbsList() {
 				</tbody>
 			</table><br />
 
-			{/* List */}
 			<table className="table table-hover">
 				<thead>
 					<tr>
@@ -136,6 +135,8 @@ function TableRow(props) {
 						// 삭제되지 않은 게시글
 						<>
 							<td >
+								<Arrow depth={bbs.depth}></Arrow> &nbsp; { /* 답글 화살표 */}
+
 								<Link to={{ pathname: `/bbsdetail/${bbs.seq}` }}> { /* 게시글 상세 링크 */}
 									<span className="underline bbs-title" >{bbs.title} </span> { /* 게시글 제목 */}
 								</Link>
@@ -146,6 +147,8 @@ function TableRow(props) {
 						// 삭제된 게시글
 						<>
 							<td>
+								<Arrow depth={bbs.depth}></Arrow> &nbsp; { /* 답글 화살표 */}
+
 								<span className="del-span">⚠️ 이 글은 작성자에 의해 삭제됐습니다.</span>
 							</td>
 						</>	
@@ -155,6 +158,26 @@ function TableRow(props) {
 			</tr>
 		
 	);
+}
+
+const tap = "\u00A0\u00A0\u00A0\u00A0";
+function Arrow( props ) {
+	const depth = props.depth;
+
+	if (depth === 0) {
+		return null;
+	}
+
+	const taps = [];
+	for(let i = 0; i < depth; i++) {
+		taps.push(tap);
+	}
+
+	return (
+		<>
+			{taps} <i className="fas fa-long-arrow-alt-right"></i>
+		</> 
+	 );
 }
 
 export default BbsList;

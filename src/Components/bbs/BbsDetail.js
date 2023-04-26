@@ -16,7 +16,7 @@ function BbsDetail () {
     const navigate = useNavigate();
 
     const getBbsDetail =  async () => {
-        await axios.get(`http://localhost:8080/bbs/${seq}`)
+        await axios.get(`http://localhost:8080/bbs/${seq}`, {params: {readerId: auth ? auth : ""}})
         .then((resp) => {
         console.log("[BbsDetail.js] getBbsDetail() success");
                 console.log(resp.data);
@@ -61,7 +61,6 @@ function BbsDetail () {
         <div>
             <div className="my-3 d-flex justify-content-end">
 				<Link className="btn btn-outline-secondary" to={{pathname: `/bbsanswer/${bbs.seq}` }} state={{ parentBbs: parentBbs }}><i className="fas fa-pen"></i> 답글쓰기</Link> &nbsp;
-
 			{
 				/* 자신이 작성한 게시글인 경우에만 수정 삭제 가능 */
 				(localStorage.getItem("id") == bbs.id) ?
