@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+## 게시판 프로젝트 입니다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 목차
+* [패키지 구조](#-프로젝트-구조)
+* [사용 기술](#-사용-기술)
+* [기능 실행화면](#-기능-실행화면)
 
-## Available Scripts
 
-In the project directory, you can run:
+# 프로젝트 구조
 
-### `npm start`
+### Frontend
+|기술|버전|
+|----|----|
+|NodeJS|16.16.0|
+|React|18.2.0|
+|axios|0.27.2|
+|react-axios|2.0.6|
+|react-dom|18.2.0|
+|react-js-pagination|3.0.3|
+|react-router|6.3.0|
+|react-router-dom|6.3.0|
+|react-scripts|5.0.1|
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# 구현 기능
+* 게시판 기능
+  * 모든 게시글 및 특정 게시글 조회
+  * 게시글 검색 (제목, 내용, 작성자)
+  * 게시글 작성 [회원]
+  * 게시글 수정 [회원, 게시글 작성자]
+  * 게시글 삭제 [회원, 게시글 작성자]
+  * 게시글 답글 작성 [회원]
+* 댓글 기능
+  * 댓글 조회
+  * 댓글 작성 [회원]
+  * 댓글 수정 [회원, 댓글 작성자]
+  * 댓글 삭제 [회원, 댓글 작성자]
+* 회원 기능
+  * 회원가입
+  * 로그인/로그아웃
+  
 
-### `npm test`
+# 기능 실행화면
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 게시판 기능
+### 모든 게시글 및 특정 게시글 조회
+* 모든 게시글을 조회할 수 있습니다. 페이징 기능을 통해 한 페이지에서 최대 10개의 게시글이 조회됩니다.
 
-### `npm run build`
+* 게시글의 제목을 클릭하면, 게시글의 상세 내용을 조회할 수 있습니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 게시글 검색
+* 게시글의 제목과 내용 또는 작성자로 게시글을 검색할 수 있습니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 게시글 작성
+* 로그인한 사용자는 게시글을 작성할 수 있습니다.
+* 로그인하지 않았을 경우 글 작성이 제한됩니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 게시글 수정
+* 게시글 작성자는 게시글을 수정할 수 있습니다. 
+* 자신이 작성한 게시글에만 수정, 삭제 버튼이 활성화됩니다.
 
-### `npm run eject`
+### 게시글 삭제
+* 게시글 작성자는 게시글을 삭제할 수 있습니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 게시글 답글 작성
+* 하나의 게시글에 대한 답글을 작성할 수 있습니다. `게시글 작성` 과 마찬가지로 로그인한 사용자만 답글을 작성할 수 있습니다.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 댓글 기능
+### 댓글 조회
+* `게시글 상세` 에서 관련된 댓글을 조회할 수 있습니다. 페이징 기능을 통해 한 페이지에서 최대 5개의 댓글이 조회됩니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 댓글 작성
+* 로그인한 사용자는 댓글을 작성할 수 있습니다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 댓글 수정
+* 자신이 작성한 댓글을 수정할 수 있습니다.
 
-## Learn More
+### 댓글 삭제
+* 자신이 작성한 댓글을 삭제할 수 있습니다.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 회원 기능
+### 회원가입
+* 회원가입 시 아이디 중복을 체크합니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* 회원가입을 통해 서비스에 사용자 정보를 저장합니다.
 
-### Code Splitting
+### 로그인/로그아웃
+* 로그인
+* 로그인을 완료하면 브라우저의 `Local Storage` 에 사용자 `id` 와 `JWT` 토큰 정보를 저장합니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* 로그아웃
+* 로그아웃을 완료하면 브라우저의 `Local Storage` 의 내용도 삭제합니다.
+  
+# API 명세서
+HTTP 메서드를 통해 행위를 명시할 수 있도록 RESTful 방식으로 설계했습니다. <br/><br/>
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# ERD 설계
