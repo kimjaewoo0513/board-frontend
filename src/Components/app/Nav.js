@@ -27,6 +27,7 @@ function Nav() {
 
 							<div className="dropdown-menu" aria-labelledby="navbarDropdown">
 								<Link className="dropdown-item" to="/bbslist">글목록</Link>
+								<Link className="dropdown-item" to="/bbswrite">글추가</Link>
 							</div>
 						</li>
 					</ul>

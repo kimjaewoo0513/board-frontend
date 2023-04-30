@@ -102,7 +102,7 @@ function BbsDetail () {
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr style={{height:300}}>
                         <th>내용</th>
                         <td>
                             <div>
@@ -123,7 +123,6 @@ function BbsDetail () {
 				:
 					null
 			}
-			
 
 			{/* 댓글 리스트 컴포넌트 */}
 			<CommentList  seq={seq}/>

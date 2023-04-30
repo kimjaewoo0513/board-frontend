@@ -33,16 +33,16 @@ function Login (){
 			console.log("[Login.js] login() success!");
 			console.log(resp.data);
 
-				alert(resp.data.id + "님, 성공적으로 로그인 되었습니다 🔐");
+			alert(resp.data.id + "님, 성공적으로 로그인 되었습니다 🔐");
 
-				// JWT 토큰 저장
-				localStorage.setItem("bbs_access_token", resp.data.jwt);
-				localStorage.setItem("id", resp.data.id);
+			// JWT 토큰 저장
+			localStorage.setItem("bbs_access_token", resp.data.jwt);
+			localStorage.setItem("id", resp.data.id);
 
-				setAuth(resp.data.id); // 사용자 인증 정보(아이디 저장)
-				setHeaders({"Authorization": `Bearer ${resp.data.jwt}`}); // 헤더 Authorization 필드 저장
+			setAuth(resp.data.id); // 사용자 인증 정보(아이디 저장)
+			setHeaders({"Authorization": `Bearer ${resp.data.jwt}`}); // 헤더 Authorization 필드 저장
 
-				navigate("/bbslist");
+			navigate("/bbslist");
 			
 
 		}).catch((err) => {

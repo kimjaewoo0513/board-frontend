@@ -20,6 +20,7 @@ function BbsWrite (){
 		setContent(event.target.value);
 	}
 
+	const fileList = [];
 
 	/* [POST /bbs]: 게시글 작성 */
     const createBbs = async() => {
@@ -27,7 +28,7 @@ function BbsWrite (){
 			id: localStorage.getItem("id"),
 			title : title,
 			content : content,
-
+			fileList : fileList,
 		}
 
 		await axios.post("http://localhost:8080/bbs", req, {headers: headers})
@@ -43,6 +44,16 @@ function BbsWrite (){
 			console.log(err);
 		})
 
+	}
+
+	const filesUpload = (e) => {
+		const files = Array.prototype.slice.call(e.target.files);
+		
+		files.forEach((uploadFile) => {
+            fileList.push(uploadFile);
+        });
+
+		console.log(fileList);
 	}
 
 	useEffect(() => {
@@ -72,7 +83,8 @@ function BbsWrite (){
 					<tr>
 						<th className="table-primary">내용</th>
 						<td>
-							<textarea type="text" className="form-control" value={content} onChange={changeContent} row="10"></textarea>
+							<input type="file" multiple={true} className="fileUpload" id="fileUpload"  onChange={filesUpload} style={{marginBottom:10}}/>
+							<textarea type="text" className="form-control" value={content} onChange={changeContent} row="10" style={{height:300}}></textarea>
 						</td>
 					</tr>
 				</tbody>

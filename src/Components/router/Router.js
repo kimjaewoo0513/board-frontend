@@ -18,8 +18,7 @@ function Router() {
 
 	return (
 			<Routes>
-				{/* <Route path="/" element={<Home />}></Route> */}
-				<Route path="/" element={<BbsList />}></Route>
+				<Route path="/" element={<Home />}></Route>
 				
 				<Route path="/bbslist" element={<BbsList />}></Route>
 				<Route path="/bbsdetail/:seq" element={<BbsDetail />}></Route>
